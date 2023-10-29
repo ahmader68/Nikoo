@@ -1,0 +1,6 @@
+﻿@model BasketViewModel
+<h1>Pay</h1>
+
+<h2>Total Paid : </h2><p>@Model.Basket.FinalFactor</p>
+<h2>TrackingCode : </h2><p>@Model.Payment.TrackingCode</p>
+<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success">Back To Site</a>

@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikooWeb", "NikooWeb\NikooWeb.csproj", "{80D9CAD3-BE76-4286-908A-AC83F1143BA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NikooWeb", "NikooWeb\NikooWeb.csproj", "{80D9CAD3-BE76-4286-908A-AC83F1143BA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NikooRazor", "NikooRazor\NikooRazor.csproj", "{57A1DDE1-5FC2-418B-BA16-F1002257068F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nikoo.DataAccess", "Nikoo.DataAccess\Nikoo.DataAccess.csproj", "{7AA8F870-A35D-4E15-8257-D376EE94320C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nikoo.Models", "Nikoo.Models\Nikoo.Models.csproj", "{0ECC37F6-A9B1-4A39-B3BB-BE54710471E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nikoo.Utility", "Nikoo.Utility\Nikoo.Utility.csproj", "{5200EF0B-6F18-4500-8D57-496FA1B52BD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{80D9CAD3-BE76-4286-908A-AC83F1143BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80D9CAD3-BE76-4286-908A-AC83F1143BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80D9CAD3-BE76-4286-908A-AC83F1143BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A1DDE1-5FC2-418B-BA16-F1002257068F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A1DDE1-5FC2-418B-BA16-F1002257068F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A1DDE1-5FC2-418B-BA16-F1002257068F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A1DDE1-5FC2-418B-BA16-F1002257068F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AA8F870-A35D-4E15-8257-D376EE94320C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AA8F870-A35D-4E15-8257-D376EE94320C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AA8F870-A35D-4E15-8257-D376EE94320C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AA8F870-A35D-4E15-8257-D376EE94320C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECC37F6-A9B1-4A39-B3BB-BE54710471E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECC37F6-A9B1-4A39-B3BB-BE54710471E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECC37F6-A9B1-4A39-B3BB-BE54710471E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECC37F6-A9B1-4A39-B3BB-BE54710471E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5200EF0B-6F18-4500-8D57-496FA1B52BD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5200EF0B-6F18-4500-8D57-496FA1B52BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5200EF0B-6F18-4500-8D57-496FA1B52BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5200EF0B-6F18-4500-8D57-496FA1B52BD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

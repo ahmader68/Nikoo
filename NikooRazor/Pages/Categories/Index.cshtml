@@ -1,0 +1,58 @@
+﻿@page
+@model Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "Category page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Categories</h1>
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">List Of Categories : </h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-page="/Categories/Create" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Add New Category
+                </a>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        Order
+                    </td>
+                    <td>
+                        Actions
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CategoryList)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.DisplayOrder</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-page="/Categories/Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-page="/Categories/Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

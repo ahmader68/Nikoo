@@ -1,0 +1,164 @@
+﻿@model BasketViewModel
+
+<form method="post">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient text-light py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-white text-uppercase">Basket</h3>
+                    <p class="text-white-50 fw-semibold mb-0">@Model.Basket.TotalFactor.ToString("c0")</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-6 col-md-2 offset-lg-1 pb-1">
+                    <a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                        <small>Back to home</small>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 pb-4">
+                <span class="badge">@Model.Basket.CreateDate</span>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>
+                            Title
+                        </td>
+                        <td>
+                            Unit Price
+                        </td>
+                        <td>
+                            Quantity
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (BasketItem item in Model.BasketItems)
+                    {
+                        <tr>
+                            <td>@item.Product.Title</td>
+                            <td>@item.UnitPrice</td>
+                            <td>@item.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (!(bool)Model.Basket.IsPaid)
+            {
+                <div class="py-5">
+                    <div class="row">
+                        <div class="col-10 offset-lg-1">
+
+                            <div class="form-floating py-2">
+                                <input asp-for="@Model.Basket.Address" class="form-control border-0 shadow" />
+                                <label asp-for="@Model.Basket.Address" class="ms-2"></label>
+                                <span asp-validation-for="@Model.Basket.Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2">
+                                <select asp-for="@Model.Basket.PostType" onchange="postType()" asp-items="@Model.PostTypes" class="form-select border-0 shadow">
+                                    <option disabled selected>---Select Type---</option>
+                                </select>
+                                <label asp-for="@Model.Basket.PostType" class="ms-2"></label>
+                                <span asp-validation-for="@Model.Basket.PostType" class="text-danger"></span>
+                            </div>
+                            <div class="row ps-2">
+                                Total Price:
+                                <h6 class="text-dark text-opacity-50 ">@Model.Basket.TotalFactor.ToString("C0")</h6>
+                            </div>
+                            <div class="row pl-2 mb-3">
+                                <div class="col-12 col-md-4">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text bg-primary text-white border-0 fw-semibold"
+                                              id="inputGroup-sizing-default">
+                                            Discount
+                                        </span>
+                                        <input id="DiscountCode" type="text" class="form-control text-end"
+                                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 pb-1">
+                                    <button type="button" onclick="DiscountProccess()"
+                                            class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                        Proccess
+                                    </button>
+                                </div>
+                                <div class="col-12 col-md-4 ps-2">
+                                    <h6 class="text-dark text-opacity-50  pb-2">
+                                        Final Price:
+                                        <span id="FinalFactorText" class="text-success">
+                                            @Model.Basket.FinalFactor.ToString("C0")
+                                        </span>
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 pb-1">
+                                    <input id="TotalFactor" asp-for="@Model.Basket.TotalFactor" hidden />
+                                    <input id="FinalFactor" asp-for="@Model.Basket.FinalFactor" value="" hidden />
+                                    <input id="DiscountId" asp-for="@Model.Basket.DiscountId" value="" hidden />
+                                    <input asp-for="@Model.Basket.Id" hidden />
+                                    <button type="submit" asp-action="BasketDetails" asp-route-productId="@Model.Basket"
+                                            class="btn btn-success bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                        Pay
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function postType(){
+            var PostType = $('#Basket_PostType').val();
+            var factory = parseInt($('#TotalFactor').val());
+            if (PostType == "1") {
+                factory = factory + 500;
+                $('#TotalFactor').val(factory);
+            }
+            else {
+                factory = factory - 500;
+                $('#TotalFactor').val(factory)
+            }
+            $('#FinalFactorText').text(factory);
+        }
+
+        function DiscountProccess() {
+
+            $.ajax({
+                type: "Post",
+                url: "@Url.Action("CheckDiscount")",
+                dataType: "json",
+                data: {
+                    totalPrice: $('#TotalFactor').val(),
+                    discountCode: $('#DiscountCode').val()
+                },
+                success: function (result) {
+                    console.log(result);
+                    console.log(result.value.message);
+                    console.log(result.value.finalPrice);
+                    console.log(result.value.discountId);
+                    $('#DiscountId').val(result.value.discountId);
+                    $('#FinalFactor').val(result.value.finalPrice);
+                    $('#FinalFactorText').text(result.value.finalPrice);
+                },
+                error: function (result) {
+                    console.log(result.value.message);
+                    $('#FinalFactorText').text(result.value.message);
+                }
+            });
+
+        }
+    </script>
+}
